@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: transaction-service
+  datasource:
+    url: jdbc:postgresql://192.168.1.10:5432/td_ledger_transaction
+    username: zan
+    password: zan1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+        format_sql: false
+        jdbc:
+          time_zone: Asia/Jakarta
+  jackson:
+    time-zone: Asia/Jakarta
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    exchange: events-exchange
+    queue: event-service-queue
+    routing-key: transaction.event
+
+server:
+  port: 0
+  gateway:
+    url: http://localhost:8080
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    instance:
+      preferIpAddress: true
